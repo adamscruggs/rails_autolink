@@ -113,8 +113,8 @@ module RailsAutolink
                 unless options[:sanitize] == false
                   prepend_url = ""
                   prepend_url = options[:prepend] unless options[:prepend].nil?
-                  link_text = prepend_url + sanitize(link_text)
-                  href      = sanitize(href)
+                  link_text = sanitize(link_text)
+                  href      = prepend_url + sanitize(href)
                 end
                 content_tag(:a, link_text, link_attributes.merge('href' => href), !!options[:sanitize]) + punctuation.reverse.join('')
               end
