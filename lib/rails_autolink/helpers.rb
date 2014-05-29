@@ -111,7 +111,9 @@ module RailsAutolink
                 href = 'http://' + href unless scheme
 
                 unless options[:sanitize] == false
-                  link_text = options[:prepend] + sanitize(link_text)
+                  prepend_url = ""
+                  prepend_url = options[:prepend] unless options[:prepend].nil?
+                  link_text = prepend_url + sanitize(link_text)
                   href      = sanitize(href)
                 end
                 content_tag(:a, link_text, link_attributes.merge('href' => href), !!options[:sanitize]) + punctuation.reverse.join('')
