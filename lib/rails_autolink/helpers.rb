@@ -59,6 +59,7 @@ module RailsAutolink
           end
           options.reverse_merge!(:link => :all, :html => {})
           sanitize = (options[:sanitize] != false)
+          prepend = options[:prepend]
           sanitize_options = options[:sanitize_options] || {}
           text = conditional_sanitize(text, sanitize, sanitize_options).to_str
           case options[:link].to_sym
@@ -110,7 +111,7 @@ module RailsAutolink
                 href = 'http://' + href unless scheme
 
                 unless options[:sanitize] == false
-                  link_text = sanitize(link_text)
+                  link_text = options[:prepend] + sanitize(link_text)
                   href      = sanitize(href)
                 end
                 content_tag(:a, link_text, link_attributes.merge('href' => href), !!options[:sanitize]) + punctuation.reverse.join('')
